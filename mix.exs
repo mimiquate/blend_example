@@ -21,7 +21,8 @@ defmodule MyLibrary.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:plug_crypto, "~> 1.2 or ~> 2.0"}
+      {:plug_crypto, "~> 1.2 or ~> 2.0"},
+      {:blend, "~> 0.5.0", only: :dev}
     ]
   end
 end
