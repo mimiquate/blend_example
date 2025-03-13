@@ -4,7 +4,7 @@
 
 Example on how to use [Blend](https://github.com/mimiquate/blend) in a Library
 
-After following the Installation and Usage sections of blend you should end up with something similar to [this commit](https://github.com/mimiquate/blend_example/commit/44b60b4cc55f5dcb5fc66a88098a07ee5fd66eca)
+After following the Installation and Usage sections of blend you should end up with something similar to [this commit]()
 
 Added also the configuration for GHA
 

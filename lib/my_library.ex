@@ -12,11 +12,16 @@ defmodule MyLibrary do
       :world
 
   """
+
+  require Logger
+
   def hello do
     :world
   end
 
   def encrypt_hello do
+    Logger.info("Plug Crypto version: #{Application.spec(:plug_crypto, :vsn)}")
+
     Plug.Crypto.encrypt("key_base", "secret", hello())
   end
 
