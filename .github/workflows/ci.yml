@@ -6,13 +6,18 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    env:
+      BLEND: ${{matrix.blend}}
+    name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}} ${{matrix.blend && format('/ Blend {0}', matrix.blend)}}
     strategy:
       fail-fast: false
       matrix:
         include:
           - elixir: '1.17'
             otp: '27.2.2'
+          - elixir: '1.17'
+            otp: '27.2.2'
+            blend: plug_crypto_1
           - elixir: '1.16'
             otp: '26.2.5.8'
     steps:
@@ -22,9 +27,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
+            blend/*/_build
+            blend/*/deps
             _build
             deps
-          key: ${{runner.os}}-${{matrix.elixir}}-${{matrix.otp}}-${{hashFiles('mix.lock')}}
+          key: ${{runner.os}}-${{matrix.elixir}}-${{matrix.otp}}-${{matrix.blend}}-${{matrix.blend && hashFiles(format('blend/{0}/mix.lock', matrix.blend)) || hashFiles('mix.lock')}}
       - uses: erlef/setup-beam@v1
         with:
           otp-version: ${{matrix.otp}}
