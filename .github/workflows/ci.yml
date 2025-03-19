@@ -6,13 +6,16 @@ on:
 jobs:
   main:
     runs-on: ubuntu-latest
-    name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}}
+    name: Test on OTP ${{matrix.otp}} / Elixir ${{matrix.elixir}} ${{matrix.blend && format('/ Blend {0}', matrix.blend)}}
     strategy:
       fail-fast: false
       matrix:
         include:
           - elixir: '1.17'
             otp: '27.2.2'
+          - elixir: '1.17'
+            otp: '27.2.2'
+            blend: plug_crypto_1
           - elixir: '1.16'
             otp: '26.2.5.8'
     steps:
@@ -29,6 +32,8 @@ jobs:
         with:
           otp-version: ${{matrix.otp}}
           elixir-version: ${{matrix.elixir}}
+      - run: cp blend/${{matrix.blend}}/mix.lock mix.lock
+        if: ${{ matrix.blend }}
       - run: mix deps.get
       - run: mix compile
       - run: mix test

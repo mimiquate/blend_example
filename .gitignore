@@ -24,3 +24,7 @@ my_library-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Blend build artifacts
+/blend/*/_build
+/blend/*/deps
